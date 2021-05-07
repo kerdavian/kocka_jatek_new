@@ -1,6 +1,8 @@
 // DOM Manipuláció: js-el módosítjuk a html-t és a css-t
 
-let scores, roundScore, activePlayer, lastDice;
+let scores, roundScore, activePlayer, lastDice, maxScoreDOM, finalScore;
+maxScoreDOM = document.querySelector('.final-score')
+maxScoreDOM.value = '100'
 function init() {
   // a két játékos pontszáma, egy 2 elemű tömbben lesz tárolva...
   // az első elem az első játékos pontszáma, a második a második játékos
@@ -14,6 +16,13 @@ function init() {
   activePlayer = 0;
 
   lastDice = 0
+  // if (maxScoreDOM.value === "") {
+  //   finalScore = '100'
+  // } else {
+  finalScore = maxScoreDOM.value
+  // }
+
+
 
   // beállítjuk a kezdő értékeket a UI-on is
   document.querySelector('#score-0').textContent = 0;
@@ -105,7 +114,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
   // ellenőrizzük hogy van e nyertes:
-  if (scores[activePlayer] >= 20) {
+  if (scores[activePlayer] >= finalScore) {
     // játék vége
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
